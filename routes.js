@@ -2,7 +2,7 @@ const {render, json} = require('./src/utils')
 
 class IndexView {
   get(request) {
-    const name = request.queryDict.name || 'gengwenhao'
+    const name = request.queryDict.name || '耿文浩'
     return render(request, 'index.html', {name})
   }
 
