@@ -1,4 +1,4 @@
-import {json, render} from './src/http/response.js'
+import {json, render} from '../src/http/response.js'
 
 class IndexView {
   get(request) {

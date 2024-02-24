@@ -1,11 +1,12 @@
-import routeMap from '../../routes.js'
 import {render} from '../http/response.js'
 import {warn} from '../utils/debug.js'
 
 export default (request) => {
   const {path} = request
 
-  const View = routeMap[path]
+  const __routeMap = global.__routeMap || {}
+
+  const View = __routeMap[path]
   if (!View) {
     warn(`${path} is not a valid path.`)
 

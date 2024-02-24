@@ -10,3 +10,9 @@ export const BASE_DIR = path.resolve(__filename, '..', '..')
 export const TEMPLATES_DIR = process.env.NODE_ENV === 'production'
   ? path.join(BASE_DIR, 'dist', 'templates')
   : path.join(BASE_DIR, 'templates')
+
+// 挂在全局 settings
+global.__SETTINGS__ = {
+  BASE_DIR,
+  TEMPLATES_DIR
+}
