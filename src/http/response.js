@@ -3,9 +3,6 @@ import path from 'node:path'
 
 import Handlebars from 'handlebars'
 
-import * as settings from '../settings.js'
-
-
 /**
  * 拼接 HTTP 响应
  * @param head
@@ -24,6 +21,8 @@ export function createdResponse(head, body) {
  * @returns {string}
  */
 export function render(request, templateName = '404.html', data = null) {
+  const settings = global.__SETTINGS__
+
   const head = `HTTP/1.1 200 OK
 content-type: text/html`
 
