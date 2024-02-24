@@ -1,16 +1,16 @@
-const fs = require('node:fs')
-const path = require('node:path')
+import fs from 'node:fs'
+import path from 'node:path'
 
-const Handlebars = require('handlebars')
+import Handlebars from 'handlebars'
 
-const BASE_DIR = path.resolve(__dirname, '..')
+import * as settings from './settings.js'
 
 /**
  * 解析 HTTP 请求报文
  * @param str
  * @returns {{head: string, path: *, method: string, line: unknown, body: *, others: *}}
  */
-function extractRequest(str) {
+export function extractRequest(str) {
   const [fullHead, body] = str.split('\r\n\r\n')
 
   // 展出完整请求头（包含请求行）
@@ -52,7 +52,7 @@ function extractRequest(str) {
  * @param body
  * @returns {string}
  */
-function createdResponse(head, body) {
+export function createdResponse(head, body) {
   return `${head}\r\n\r\n${body}`
 }
 
@@ -63,11 +63,12 @@ function createdResponse(head, body) {
  * @param data
  * @returns {string}
  */
-function render(request, templateName = '404.html', data = null) {
+export function render(request, templateName = '404.html', data = null) {
   const head = `HTTP/1.1 200 OK
 content-type: text/html`
 
-  const templatePath = path.join(BASE_DIR, 'templates', templateName)
+  const templatePath = path.join(settings.TEMPLATES_DIR, templateName)
+  console.log(path.resolve(templatePath))
   const templateStr = fs.readFileSync(templatePath).toString()
 
   // 模板渲染
@@ -80,7 +81,7 @@ content-type: text/html`
  * 返回 json 数据
  * @param o
  */
-function json(o) {
+export function json(o) {
   const head = `HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8`
   const body = JSON.stringify(o)
@@ -88,10 +89,4 @@ content-type: application/json; charset=utf-8`
   return createdResponse(head, body)
 }
 
-module.exports = {
-  BASE_DIR,
-  extractRequest,
-  createdResponse,
-  render,
-  json
-}
+

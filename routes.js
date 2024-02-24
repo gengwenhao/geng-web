@@ -1,4 +1,4 @@
-const {render, json} = require('./src/utils')
+import {json, render} from './src/utils.js'
 
 class IndexView {
   get(request) {
@@ -23,9 +23,10 @@ class JSONView {
   }
 }
 
-module.exports = {
+export default {
   '/': IndexView,
   '/index.html': IndexView,
   '/info': JSONView
 }
+
 

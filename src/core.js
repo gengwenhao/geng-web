@@ -1,8 +1,9 @@
-const net = require('net')
-const routes = require('./routes')
-const {extractRequest} = require('./utils')
+import net from 'node:net'
 
-function bootstrap(host = '127.0.0.1', port = 3000) {
+import {extractRequest} from './utils.js'
+import routes from './routes/index.js'
+
+export default function bootstrap(host = '127.0.0.1', port = 3000) {
   return new Promise((resolve, reject) => {
     const server = net.createServer((socket) => {
       socket.on('data', data => {
@@ -20,5 +21,3 @@ function bootstrap(host = '127.0.0.1', port = 3000) {
     server.listen(port, host, data => resolve({port, host, data}))
   })
 }
-
-module.exports = bootstrap

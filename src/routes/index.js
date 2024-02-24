@@ -1,7 +1,7 @@
-const routeMap = require('../../routes')
-const {render} = require('../utils')
+import routeMap from '../../routes.js'
+import {render} from '../utils.js'
 
-const routes = (request) => {
+export default (request) => {
   const {path} = request
 
   const View = routeMap[path]
@@ -21,5 +21,3 @@ const routes = (request) => {
       return view.post && view.post(request)
   }
 }
-
-module.exports = routes
