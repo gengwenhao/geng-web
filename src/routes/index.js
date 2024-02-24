@@ -1,17 +1,19 @@
 import routeMap from '../../routes.js'
-import {render} from '../utils.js'
+import {render} from '../http/response.js'
+import {warn} from '../utils/debug.js'
 
 export default (request) => {
   const {path} = request
 
   const View = routeMap[path]
   if (!View) {
-    console.warn(`${path} is not a valid path.`)
-    // throw Error('not a valid route')
+    warn(`${path} is not a valid path.`)
+
     return render(request, '404.html')
   }
 
   const view = new View()
+  warn(request.line)
   switch (request.method) {
     case 'GET':
       return view.get && view.get(request)

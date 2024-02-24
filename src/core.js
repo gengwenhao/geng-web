@@ -1,7 +1,7 @@
 import net from 'node:net'
 
-import {extractRequest} from './utils.js'
 import routes from './routes/index.js'
+import {extractRequest} from './http/request.js'
 
 export default function bootstrap(host = '127.0.0.1', port = 3000) {
   return new Promise((resolve, reject) => {
