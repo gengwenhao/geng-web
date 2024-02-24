@@ -1,0 +1,26 @@
+{
+  "name": "web-demo",
+  "version": "1.0.0",
+  "description": "web-demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node ./dist/bundle.cjs",
+    "dev": "\"cross-env NODE_ENV=development nodemon ./index.js",
+    "build": "cross-env NODE_ENV=production webpack -c ./build/base.config.cjs"
+  },
+  "bin": {
+    "gxpress": "./cli/main.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "geng-web": "^1.0.3"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.1.0",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  }
+}

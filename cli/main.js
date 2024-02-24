@@ -1,10 +1,17 @@
 #!/usr/bin/env node
+import fs from 'node:fs'
+import path from 'node:path'
+
 import {program} from 'commander'
 import commands from './commands/index.js'
-import fs from 'node:fs'
 
-(function () {
-  const packageJSON = JSON.parse(fs.readFileSync('package.json'))
+import {getDIRName} from './utils/get-path.js'
+
+
+(async function () {
+  const dirName = await getDIRName()
+  const packageDIR = path.join(dirName,'..', '..', 'package.json')
+  const packageJSON = JSON.parse(fs.readFileSync(packageDIR))
 
   program
     .name(packageJSON.name)

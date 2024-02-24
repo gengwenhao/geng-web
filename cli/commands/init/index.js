@@ -1,15 +1,13 @@
-import fs from 'node:fs'
-
 import ora from 'ora'
+import {copyExamples} from '../../utils/copy-examples.js'
 
 export default function (program) {
   program
-    .command('init')
+    .command('init <dirName>')
     .description('建立本地代码练习项目')
-    .option('-d, --dir <string>', '项目名称', 'web-demo')
-    .action((options) => {
+    .action((dirName, options) => {
       const spinner = ora('创建中...').start()
-      fs.mkdirSync(options.dir)
+      copyExamples(dirName)
       spinner.succeed('创建完成')
     })
 }
